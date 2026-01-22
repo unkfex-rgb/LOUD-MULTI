@@ -12,7 +12,8 @@ export default function Page() {
   const [mainStreamer, setMainStreamer] = useState('loud_coringa');
   const [chatStreamer, setChatStreamer] = useState('loud_coringa');
   const [chatWidth, setChatWidth] = useState(320);
-  const isResizing = useRef(false);
+  const [isResizing, setIsResizing] = useState(false);
+  const isResizingRef = useRef(false);
 
   const streamers = [
     { name: 'loud_coringa', twitch: 'https://www.twitch.tv/loud_coringa' },
@@ -22,7 +23,7 @@ export default function Page() {
 
   useEffect(() => {
     const handleMouseMove = (e) => {
-      if (!isResizing.current) return;
+      if (!isResizingRef.current) return;
       const newWidth = window.innerWidth - e.clientX;
       if (newWidth >= 200 && newWidth <= 600) {
         setChatWidth(newWidth);
@@ -30,12 +31,15 @@ export default function Page() {
     };
 
     const handleMouseUp = () => {
-      isResizing.current = false;
+      isResizingRef.current = false;
+      setIsResizing(false);
       document.body.style.cursor = 'default';
+      document.body.style.userSelect = 'auto';
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
+    
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
@@ -44,8 +48,10 @@ export default function Page() {
 
   const startResizing = (e) => {
     e.preventDefault();
-    isResizing.current = true;
+    isResizingRef.current = true;
+    setIsResizing(true);
     document.body.style.cursor = 'ew-resize';
+    document.body.style.userSelect = 'none';
   };
 
   const handleChatChange = (name) => {
@@ -78,6 +84,19 @@ export default function Page() {
       </div>
       
       <main>
+        {/* Overlay invisível para capturar o mouse durante o redimensionamento e evitar que o iframe "roube" o evento */}
+        {isResizing && (
+          <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 9999,
+            cursor: 'ew-resize'
+          }} />
+        )}
+
         {mode === 'grid' && (
           <div className="layout-wrapper">
             <div className="grid-main-area">
@@ -103,7 +122,8 @@ export default function Page() {
               <Player streamer={mainStreamer} />
             </div>
             
-            <div className="chat-area" style={{ width: '320px' }}>
+            <div className="chat-area" style={{ width: `${chatWidth}px` }}>
+              <div className="chat-resizer" onMouseDown={startResizing}></div>
               <ChatSelector />
               <Chat streamer={chatStreamer} />
             </div>
@@ -118,7 +138,8 @@ export default function Page() {
               ))}
             </div>
             
-            <div className="chat-area" style={{ width: '320px' }}>
+            <div className="chat-area" style={{ width: `${chatWidth}px` }}>
+              <div className="chat-resizer" onMouseDown={startResizing}></div>
               <ChatSelector />
               <Chat streamer={chatStreamer} />
             </div>
