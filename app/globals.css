@@ -1,33 +1,79 @@
+/* globals.css */
 
-body, html {
+* {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
-  background: url('/background.jpg') no-repeat center center fixed;
-  background-size: cover;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: url('/background.jpg') center/cover no-repeat;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: rgba(0,0,0,0.3);
   backdrop-filter: blur(5px);
 }
 
-.grid-container {
+.logo-title {
   display: flex;
-  height: calc(100vh - 100px);
+  align-items: center;
   gap: 10px;
-  padding: 10px;
+}
+
+.logo-title img {
+  height: 60px;
+}
+
+.logo-title h1 {
+  font-size: 1.8rem;
+  color: #00ff7f;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 10px;
+  height: calc(100vh - 140px);
 }
 
 .grid-main {
-  display: flex;
-  flex-direction: column;
+  position: relative;
 }
 
 .grid-side {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 10px;
+}
+
+.player {
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 .chat-container {
   position: relative;
+  width: 300px;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .chat-resize {
@@ -38,49 +84,33 @@ body, html {
   height: 100%;
   cursor: ew-resize;
   z-index: 10;
-  background: rgba(255,255,255,0.2);
-  transition: background 0.2s ease;
 }
 
-.chat-resize:hover {
-  background: rgba(255,255,255,0.5);
+footer {
+  text-align: center;
+  padding: 15px 0;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(5px);
 }
 
-.focus-buttons button, .chat-buttons button {
-  background: #00ff99;
-  border: none;
-  padding: 10px 15px;
-  margin: 5px;
-  border-radius: 8px;
+.dev {
   cursor: pointer;
-  color: #000;
-  font-weight: bold;
-  transition: all 0.2s ease;
+  color: #fff;
+  transition: color 0.3s ease;
 }
 
-.focus-buttons button:hover, .chat-buttons button:hover {
-  background: #00dd77;
-}
-
-/* Footer hover Instagram red */
-.footer-dev {
-  cursor: pointer;
-  color: white;
-  font-weight: bold;
-  transition: all 0.2s ease;
-}
-
-.footer-dev:hover {
-  color: #E1306C; /* Instagram pink */
+.dev:hover {
+  color: #ff007f;
 }
 
 /* Mobile */
 @media (max-width: 768px) {
-  .grid-container, .focus-container, .auto-container {
+  .grid-container {
+    display: flex;
     flex-direction: column;
     height: auto;
   }
-  .chat-container, .focus-buttons, .ModeMenu {
+  .chat-container {
     display: none;
   }
 }
