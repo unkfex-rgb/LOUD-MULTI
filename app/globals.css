@@ -7,10 +7,24 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background: #0a0a0a url('/background.jpg') center/cover no-repeat fixed;
+  background: #0a0a0a; /* Fundo neutro escuro */
   color: #fff;
   overflow: hidden;
   height: 100vh;
+  position: relative;
+}
+
+/* Fundo neutro levemente desfocado */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/background.jpg') center/cover no-repeat fixed;
+  filter: blur(15px) brightness(0.3); /* Desfoque e escurecimento */
+  z-index: -1;
 }
 
 header {
@@ -19,7 +33,7 @@ header {
   justify-content: space-between;
   padding: 0 20px;
   height: 60px;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   z-index: 100;
   border-bottom: 1px solid rgba(0, 255, 127, 0.1);
@@ -81,7 +95,7 @@ header {
 
 main {
   height: calc(100vh - 60px - 25px);
-  padding: 10px;
+  padding: 15px;
 }
 
 /* Layout Wrappers */
@@ -93,14 +107,14 @@ main {
   position: relative;
 }
 
-/* Grid Mode: 1 Main (Left), 2 Stacked (Center-Right), Chat (Far Right) */
+/* Grid Mode: 1 Main (50%), 2 Stacked (Right), Chat (Far Right) */
 .grid-main-area {
-  flex: 1; /* Ocupa o máximo de espaço à esquerda */
+  flex: 0 0 50%; /* Aproximadamente metade da tela */
   height: 100%;
 }
 
 .grid-side-area {
-  width: 350px; /* Largura fixa para os players empilhados como no print */
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -149,7 +163,7 @@ main {
   background: transparent;
 }
 
-/* Player Styling */
+/* Player Styling - No Blackbars */
 .player {
   background: #000;
   border-radius: 15px;
@@ -158,6 +172,13 @@ main {
   height: 100%;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+.player iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Tenta preencher o espaço para evitar blackbars */
 }
 
 /* Chat Styling */
