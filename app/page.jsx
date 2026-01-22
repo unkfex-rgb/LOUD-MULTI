@@ -21,53 +21,68 @@ export default function Page() {
   return (
     <>
       <Header />
-      <ModeMenu mode={mode} setMode={setMode} />
+      <div style={{ position: 'absolute', top: '15px', right: '20px', zIndex: 101 }}>
+        <ModeMenu mode={mode} setMode={setMode} />
+      </div>
+      
       <main>
         {mode === 'grid' && (
-          <div className="grid-container">
-            <div className="grid-main">
+          <div className="grid-layout-wrapper">
+            {/* Main Stream */}
+            <div className="main-stream-area">
               <Player streamer={mainStreamer} />
             </div>
-            <div className="grid-side">
-              <Player streamer={streamers[1].name} height="48%" />
-              <Player streamer={streamers[2].name} height="48%" />
+            
+            {/* Side Streams */}
+            <div className="side-streams-area">
+              <Player streamer={streamers[1].name} height="calc(50% - 5px)" />
+              <Player streamer={streamers[2].name} height="calc(50% - 5px)" />
             </div>
-            <div className="chat-container">
-              <div className="chat-resize"></div>
+            
+            {/* Chat */}
+            <div className="chat-area">
               <Chat streamer={chatStreamer} />
             </div>
           </div>
         )}
 
         {mode === 'focus' && (
-          <div className="focus-container">
-            <Player streamer={mainStreamer} big />
-            <div className="focus-buttons">
-              {streamers.map((s) => (
-                <button key={s.name} onClick={() => setMainStreamer(s.name)}>
-                  {s.name}
-                </button>
-              ))}
+          <div className="grid-layout-wrapper">
+            <div className="main-stream-area">
+              <Player streamer={mainStreamer} />
             </div>
-            <div className="chat-container">
+            <div className="chat-area">
+              <div className="focus-buttons" style={{ marginBottom: '10px', display: 'flex', gap: '5px' }}>
+                {streamers.map((s) => (
+                  <button 
+                    key={s.name} 
+                    onClick={() => setMainStreamer(s.name)}
+                    style={{ 
+                      flex: 1, 
+                      padding: '5px', 
+                      background: s.name === mainStreamer ? '#00ff7f' : 'rgba(255,255,255,0.1)',
+                      color: s.name === mainStreamer ? '#000' : '#fff',
+                      border: 'none',
+                      borderRadius: '4px',
+                      fontSize: '0.7rem',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {s.name}
+                  </button>
+                ))}
+              </div>
               <Chat streamer={chatStreamer} />
             </div>
           </div>
         )}
 
         {mode === 'auto' && (
-          <div className="auto-container">
-            {streamers.map((s) => (
-              <Player key={s.name} streamer={s.name} />
-            ))}
-            <div className="chat-container">
-              <div className="chat-buttons">
-                {streamers.map((s) => (
-                  <button key={s.name} onClick={() => setChatStreamer(s.name)}>
-                    {s.name}
-                  </button>
-                ))}
-              </div>
+          <div className="grid-layout-wrapper" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: '10px' }}>
+            <Player streamer={streamers[0].name} />
+            <Player streamer={streamers[1].name} />
+            <Player streamer={streamers[2].name} />
+            <div className="chat-area" style={{ width: '100%' }}>
               <Chat streamer={chatStreamer} />
             </div>
           </div>

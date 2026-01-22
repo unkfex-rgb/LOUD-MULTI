@@ -5,7 +5,10 @@ export default function Header() {
     <header>
       <div className="logo-title">
         <img src="/logo-loud.png" alt="Logo Loud" />
-        <h1>LOUD MULTI STREAM HUB</h1>
+        <div className="text-container">
+          <h1>LOUD MULTISTREAM</h1>
+          <span>STREAMING HUB</span>
+        </div>
       </div>
     </header>
   );
