@@ -102,23 +102,25 @@ main {
 
 .layout-wrapper {
   display: flex;
-  gap: 15px;
-  flex: 1;
+  gap: 12px; /* Espaçamento entre os quadros principais */
+  height: 100%;
   width: 100%;
-  position: relative;
+  padding: 12px;
+  box-sizing: border-box;
 }
 
-/* Grid Mode */
 .grid-main-area {
   flex: 1;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .grid-side-area {
-  width: 400px;
+  width: 380px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px; /* Espaçamento entre os players empilhados */
   height: 100%;
 }
 

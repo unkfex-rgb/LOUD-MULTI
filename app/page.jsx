@@ -99,15 +99,22 @@ export default function Page() {
 
         {mode === 'grid' && (
           <div className="layout-wrapper">
+            {/* Quadro Principal */}
             <div className="grid-main-area">
               <Player streamer={mainStreamer} />
             </div>
             
+            {/* Quadro Lateral com Players Empilhados */}
             <div className="grid-side-area">
-              <Player streamer={streamers[1].name} />
-              <Player streamer={streamers[2].name} />
+              <div style={{ flex: 1, height: '50%', display: 'flex', flexDirection: 'column' }}>
+                <Player streamer={streamers[1].name} />
+              </div>
+              <div style={{ flex: 1, height: '50%', display: 'flex', flexDirection: 'column' }}>
+                <Player streamer={streamers[2].name} />
+              </div>
             </div>
             
+            {/* Quadro do Chat */}
             <div className="chat-area" style={{ width: `${chatWidth}px` }}>
               <div className="chat-resizer" onMouseDown={startResizing}></div>
               <ChatSelector />
