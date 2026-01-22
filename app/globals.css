@@ -28,11 +28,11 @@ header {
 .logo-title {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
 }
 
 .logo-title img {
-  height: 40px;
+  height: 32px; /* Tamanho ajustado para ser discreto como no exemplo */
 }
 
 .logo-title .text-container {
@@ -41,7 +41,7 @@ header {
 }
 
 .logo-title h1 {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 900;
   color: #00ff7f;
   line-height: 1;
@@ -49,24 +49,24 @@ header {
 }
 
 .logo-title span {
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   color: #fff;
   font-weight: 600;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
 }
 
 .mode-menu {
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
 
 .mode-menu button {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(0, 255, 127, 0.2);
   color: #00ff7f;
-  padding: 6px 16px;
+  padding: 4px 12px;
   border-radius: 4px;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -76,12 +76,12 @@ header {
 .mode-menu button.active {
   background: #00ff7f;
   color: #000;
-  box-shadow: 0 0 15px rgba(0, 255, 127, 0.4);
+  box-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
 }
 
 main {
   height: calc(100vh - 60px - 25px);
-  padding: 10px;
+  padding: 15px;
 }
 
 /* Layout Wrappers */
@@ -93,7 +93,7 @@ main {
   position: relative;
 }
 
-/* Grid Mode */
+/* Grid Mode: 65% Main, 35% Side/Chat */
 .grid-main-area {
   flex: 0 0 65%;
   height: 100%;
@@ -125,7 +125,7 @@ main {
 
 .auto-players-area .player {
   flex: 1;
-  max-height: 80%; /* Centraliza verticalmente */
+  max-height: 90%;
 }
 
 /* Chat Area */
@@ -134,74 +134,67 @@ main {
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 /* Resize Handle */
 .chat-resizer {
   position: absolute;
-  left: -8px;
+  left: -10px;
   top: 0;
-  width: 10px;
+  width: 15px;
   height: 100%;
   cursor: ew-resize;
   z-index: 10;
   background: transparent;
 }
 
-.chat-resizer:hover {
-  background: rgba(0, 255, 127, 0.2);
-}
-
 /* Player Styling */
 .player {
   background: #000;
-  border-radius: 12px;
+  border-radius: 15px; /* Bordas arredondadas como no exemplo */
   overflow: hidden;
   width: 100%;
   height: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
 }
 
 /* Chat Styling - Futuristic */
 .chat-container {
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
   overflow: hidden;
   width: 100%;
   flex: 1;
-  border: 1px solid rgba(0, 255, 127, 0.2);
-  backdrop-filter: blur(5px);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(0, 255, 127, 0.15);
+  backdrop-filter: blur(8px);
 }
 
 /* Futuristic Buttons */
 .futuristic-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(0, 255, 127, 0.3);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(0, 255, 127, 0.2);
   color: #fff;
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-radius: 6px;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .futuristic-btn:hover {
-  background: rgba(0, 255, 127, 0.15);
+  background: rgba(0, 255, 127, 0.1);
   border-color: #00ff7f;
-  box-shadow: 0 0 15px rgba(0, 255, 127, 0.2);
 }
 
 .futuristic-btn.active {
   background: #00ff7f;
   color: #000;
   border-color: #00ff7f;
-  box-shadow: 0 0 15px rgba(0, 255, 127, 0.4);
 }
 
 footer {
@@ -210,8 +203,8 @@ footer {
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.8);
-  font-size: 0.65rem;
-  color: #555;
+  font-size: 0.6rem;
+  color: #444;
 }
 
 /* Mobile Version */
@@ -219,9 +212,9 @@ footer {
   body { overflow-y: auto; }
   header { justify-content: center; }
   .mode-menu { display: none; }
-  main { height: auto; padding: 5px; }
+  main { height: auto; padding: 10px; }
   .layout-wrapper { flex-direction: column; height: auto; }
   .grid-main-area, .grid-side-area, .auto-players-area { width: 100%; height: auto; flex: none; }
-  .player { height: 250px; margin-bottom: 10px; }
+  .player { height: 220px; margin-bottom: 10px; }
   .chat-area { display: none; }
 }
