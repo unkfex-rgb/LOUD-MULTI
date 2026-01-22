@@ -93,7 +93,6 @@ header {
   box-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
 }
 
-/* Ajuste crucial: main deve ocupar todo o espaço restante e não ter padding excessivo */
 main {
   height: calc(100vh - 60px - 25px);
   padding: 10px;
@@ -104,7 +103,7 @@ main {
 .layout-wrapper {
   display: flex;
   gap: 15px;
-  flex: 1; /* Ocupa 100% da altura do main */
+  flex: 1;
   width: 100%;
   position: relative;
 }
@@ -141,7 +140,7 @@ main {
 
 .auto-players-area .player {
   flex: 1;
-  height: 100%; /* No modo auto, players ocupam altura total */
+  height: 100%;
 }
 
 /* Chat Area */
@@ -164,7 +163,7 @@ main {
   background: transparent;
 }
 
-/* Player Styling - Preenchimento Total Absoluto */
+/* Player Styling - Remoção de Blackbars */
 .player {
   background: #000;
   border-radius: 15px;
@@ -178,11 +177,16 @@ main {
 
 .player iframe {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
   width: 100%;
   height: 100%;
+  transform: translate(-50%, -50%);
   border: none;
+  /* Técnica para remover blackbars: forçar o preenchimento */
+  object-fit: cover;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 /* Chat Styling */
@@ -229,6 +233,18 @@ footer {
   background: rgba(0, 0, 0, 0.8);
   font-size: 0.6rem;
   color: #444;
+}
+
+/* Efeito de Hover do Instagram no Footer */
+.dev {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dev:hover {
+  /* Cores do Instagram: Roxo/Rosa/Laranja */
+  color: #E1306C;
+  text-shadow: 0 0 8px rgba(225, 48, 108, 0.6);
 }
 
 @media (max-width: 768px) {
