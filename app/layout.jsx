@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   title: "LOUD MULTI",
@@ -10,6 +11,7 @@ export default function RootLayout({ children }) {
     <html lang="pt-BR">
       <body>
         {children}
+        <Analytics />
       </body>
     </html>
   );
