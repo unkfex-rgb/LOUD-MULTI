@@ -27,7 +27,7 @@ export default function GridLayout() {
       onMouseUp={stopResize}
       onMouseLeave={stopResize}
     >
-      {/* PLAYERS */}
+      {/* Players */}
       <div className="grid-players">
         <div className="main-player">
           <TwitchPlayer channel="loud_coringa" />
@@ -39,13 +39,13 @@ export default function GridLayout() {
         </div>
       </div>
 
-      {/* RESIZER */}
+      {/* Resizer */}
       <div
         className="chat-resizer"
         onMouseDown={startResize}
       />
 
-      {/* CHAT */}
+      {/* Chat */}
       <div className="grid-chat" style={{ width: chatWidth }}>
         <TwitchChat channel="loud_coringa" />
       </div>
