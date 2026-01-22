@@ -166,7 +166,7 @@ main {
 /* Player Styling - Remoção de Blackbars */
 .player {
   background: #000;
-  border-radius: 0; /* Borda infinita: sem arredondamento */
+  border-radius: 15px; /* Cantos arredondados restaurados */
   overflow: hidden;
   width: 100%;
   height: 100%;
@@ -179,12 +179,15 @@ main {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 100%; /* Preenchimento total sem zoom excessivo */
+  width: 100%;
   height: 100%;
   transform: translate(-50%, -50%);
   border: none;
   pointer-events: auto;
-  object-fit: cover; /* Garante que o vídeo preencha o container sem blackbars */
+  /* Técnica de borda infinita: o vídeo preenche todo o container arredondado */
+  object-fit: cover; 
+  min-width: 100%;
+  min-height: 100%;
 }
 
 /* Chat Styling */
