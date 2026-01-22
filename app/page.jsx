@@ -13,7 +13,7 @@ export default function Page() {
   const [mainStreamer, setMainStreamer] = useState('loud_coringa');
   const [chatStreamer, setChatStreamer] = useState('loud_coringa');
   const [refreshKey, setRefreshKey] = useState(0);
-  const [chatWidth, setChatWidth] = useState(300); // largura inicial do chat
+  const [chatWidth, setChatWidth] = useState(300);
   const chatContainerRef = useRef();
   const isResizing = useRef(false);
 
@@ -23,20 +23,13 @@ export default function Page() {
     { name: 'gabepeixe', twitch: 'https://www.twitch.tv/gabepeixe' },
   ];
 
-  // Recarregar Twitch Embed no Grid
   useEffect(() => {
     setRefreshKey(prev => prev + 1);
   }, [mode]);
 
-  // Eventos de redimensionamento
   useEffect(() => {
-    const startResize = (e) => {
-      e.preventDefault();
-      isResizing.current = true;
-    };
-    const stopResize = () => {
-      isResizing.current = false;
-    };
+    const startResize = (e) => { e.preventDefault(); isResizing.current = true; };
+    const stopResize = () => { isResizing.current = false; };
     const resize = (e) => {
       if (isResizing.current && chatContainerRef.current) {
         const containerWidth = chatContainerRef.current.parentElement.offsetWidth;
@@ -46,22 +39,22 @@ export default function Page() {
         setChatWidth(newWidth);
       }
     };
-
     window.addEventListener('mousemove', resize);
     window.addEventListener('mouseup', stopResize);
-
     return () => {
       window.removeEventListener('mousemove', resize);
       window.removeEventListener('mouseup', stopResize);
     };
   }, []);
 
+  const isMobile = window.innerWidth <= 768;
+
   return (
     <>
       <Header />
-      {window.innerWidth > 768 && <ModeMenu mode={mode} setMode={setMode} />}
+      {!isMobile && <ModeMenu mode={mode} setMode={setMode} />}
       <main>
-        {mode === 'grid' && (
+        {mode === 'grid' && !isMobile && (
           <div className="grid-container" key={refreshKey}>
             <div className="grid-main" style={{ width: `calc(100% - ${chatWidth + 10}px - 20%)` }}>
               <Player streamer={mainStreamer} />
@@ -77,17 +70,14 @@ export default function Page() {
             >
               <div
                 className="chat-resize"
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  isResizing.current = true;
-                }}
+                onMouseDown={(e) => { e.preventDefault(); isResizing.current = true; }}
               />
               <Chat streamer={chatStreamer} />
             </div>
           </div>
         )}
 
-        {mode === 'focus' && (
+        {mode === 'focus' && !isMobile && (
           <div className="focus-container">
             <Player streamer={mainStreamer} big />
             <div className="focus-buttons">
@@ -103,7 +93,7 @@ export default function Page() {
           </div>
         )}
 
-        {mode === 'auto' && (
+        {mode === 'auto' && !isMobile && (
           <div className="auto-container">
             {streamers.map((s) => (
               <Player key={s.name} streamer={s.name} />
@@ -118,6 +108,14 @@ export default function Page() {
               </div>
               <Chat streamer={chatStreamer} />
             </div>
+          </div>
+        )}
+
+        {isMobile && (
+          <div className="mobile-container">
+            {streamers.map((s) => (
+              <Player key={s.name} streamer={s.name} />
+            ))}
           </div>
         )}
       </main>
